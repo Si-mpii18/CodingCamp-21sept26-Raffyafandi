@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>💸 Expense &amp; Budget Visualizer</h1>
+    <p>Catat pengeluaran, pantau anggaran, visualisasikan dengan grafik.</p>
+  </header>
+
+  <!-- ===== MAIN GRID ===== -->
+  <main class="app-grid">
+
+    <!-- ── 1. SUMMARY BAR (full width) ── -->
+    <section class="card summary-card" aria-label="Ringkasan pengeluaran">
+      <div class="summary-item total-item">
+        <div class="label">Total Pengeluaran</div>
+        <div class="amount" id="summary-total">Rp 0</div>
+      </div>
+      <div class="summary-item food-item">
+        <div class="label">🍔 Food</div>
+        <div class="amount" id="summary-food">Rp 0</div>
+      </div>
+      <div class="summary-item transport-item">
+        <div class="label">🚌 Transport</div>
+        <div class="amount" id="summary-transport">Rp 0</div>
+      </div>
+      <div class="summary-item fun-item">
+        <div class="label">🎉 Fun</div>
+        <div class="amount" id="summary-fun">Rp 0</div>
+      </div>
+    </section>
+
+    <!-- ── 2. FORM INPUT ── -->
+    <section class="card" aria-label="Form tambah pengeluaran">
+      <h2><span class="icon">➕</span> Tambah Pengeluaran</h2>
+
+      <form id="expense-form" novalidate>
+
+        <!-- Nama Item -->
+        <div class="form-group">
+          <label for="input-name">Nama Item</label>
+          <input
+            type="text"
+            id="input-name"
+            placeholder="cth. Makan siang, Grab, Nonton"
+            autocomplete="off"
+            maxlength="60"
+          />
+          <span class="error-msg" id="err-name" role="alert"></span>
+        </div>
+
+        <!-- Jumlah -->
+        <div class="form-group">
+          <label for="input-amount">Jumlah (Rp)</label>
+          <input
+            type="number"
+            id="input-amount"
+            placeholder="cth. 25000"
+            min="1"
+            step="1"
+          />
+          <span class="error-msg" id="err-amount" role="alert"></span>
+        </div>
+
+        <!-- Kategori -->
+        <div class="form-group">
+          <label for="input-category">Kategori</label>
+          <select id="input-category">
+            <option value="">— Pilih kategori —</option>
+            <option value="Food">🍔 Food</option>
+            <option value="Transport">🚌 Transport</option>
+            <option value="Fun">🎉 Fun</option>
+          </select>
+          <span class="error-msg" id="err-category" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-add">Tambahkan</button>
+      </form>
+    </section>
+
+    <!-- ── 3. TRANSACTION LIST ── -->
+    <section class="card" aria-label="Daftar transaksi">
+      <h2><span class="icon">📋</span> Riwayat Transaksi</h2>
+      <ul id="transaction-list" class="transaction-list" aria-live="polite">
+        <!-- Rendered by app.js -->
+      </ul>
+    </section>
+
+    <!-- ── 4. PIE CHART ── -->
+    <section class="card" aria-label="Visualisasi pengeluaran">
+      <h2><span class="icon">📊</span> Visualisasi</h2>
+
+      <div class="chart-wrapper">
+        <canvas id="pie-chart" aria-label="Pie chart pengeluaran per kategori" role="img"></canvas>
+      </div>
+
+      <!-- Custom legend -->
+      <div class="chart-legend" aria-label="Legenda grafik">
+
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#f59e0b;"></span>
+          <span class="legend-label">🍔 Food</span>
+          <span class="legend-value" id="legend-val-food">Rp 0 (0%)</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#3b82f6;"></span>
+          <span class="legend-label">🚌 Transport</span>
+          <span class="legend-value" id="legend-val-transport">Rp 0 (0%)</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#ec4899;"></span>
+          <span class="legend-label">🎉 Fun</span>
+          <span class="legend-value" id="legend-val-fun">Rp 0 (0%)</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SCRIPTS ===== -->
+  <!-- Chart.js CDN (pinned minor version for stability) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
